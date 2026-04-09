@@ -1,0 +1,30 @@
+import { useState } from "react";
+
+const eventos = [
+  { fecha: "2026-01-26", tipo: "Inicio", desc: "Inicio clases" },
+  { fecha: "2026-06-21", tipo: "Fin", desc: "Fin primer periodo" },
+  { fecha: "2026-07-06", tipo: "Inicio", desc: "Inicio segundo periodo" },
+  { fecha: "2026-11-29", tipo: "Fin", desc: "Fin clases" }
+];
+
+export default function App() {
+  const [mes, setMes] = useState(new Date(2026, 0));
+
+  const diasMes = new Date(mes.getFullYear(), mes.getMonth()+1, 0).getDate();
+
+  return (
+    <div style={{padding:20,fontFamily:"Arial"}}>
+      <h2>Calendario Académico SED 2026</h2>
+      <button onClick={()=>setMes(new Date(mes.getFullYear(), mes.getMonth()-1))}>◀</button>
+      <button onClick={()=>setMes(new Date(mes.getFullYear(), mes.getMonth()+1))}>▶</button>
+
+      <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:5,marginTop:10}}>
+        {Array.from({length:diasMes},(_,i)=>(
+          <div key={i} style={{padding:10,background:"#eee",textAlign:"center"}}>
+            {i+1}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
